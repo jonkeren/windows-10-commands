@@ -90,7 +90,8 @@ example, kill all Chrome processes:
 ### Exiftool create a .txt file with all photos, and listing who is on which photo (face tags):
 `exiftool -T -Directory -Filename  -RegionPersonDisplayName -r -ext jpg . > PeopleTags.txt`
 
-
+### Exiftool sort photos to subfolders of Camera make and camera model
+`exiftool -r -v -v -ext jpg "-filename<[YOUR-TARGET-DIR-HERE]\${make;} ${model;}\%f.%e" .`
 
 
 
