@@ -94,7 +94,7 @@ example, kill all Chrome processes:
 `exiftool -r -v -v -ext jpg "-filename<[YOUR-TARGET-DIR-HERE]\${make;} ${model;}\%f.%e" .`
 
 ### SFC / DISM commands
-`sfc /scannow'
+`sfc /scannow`
 `Dism.exe /Online /Cleanup-Image /CheckHealth`
 `Dism.exe /Online /Cleanup-Image /RestoreHealth`
 `Dism.exe /online /Cleanup-Image /StartComponentCleanup`
