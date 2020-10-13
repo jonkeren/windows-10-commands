@@ -95,10 +95,11 @@ example, kill all Chrome processes:
 
 ### SFC / DISM commands
 `sfc /scannow`
+
 `Dism.exe /Online /Cleanup-Image /CheckHealth`
+
 `Dism.exe /Online /Cleanup-Image /RestoreHealth`
+
 `Dism.exe /online /Cleanup-Image /StartComponentCleanup`
-`Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase'
 
-
-
+`Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase`
