@@ -103,3 +103,9 @@ example, kill all Chrome processes:
 `Dism.exe /online /Cleanup-Image /StartComponentCleanup`
 
 `Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase`
+
+### Powershell command to empty all EventViewer logs
+`Get-WinEvent -ListLog * | where {$_.RecordCount} | ForEach-Object -Process { [System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($_.LogName) }`
+
+### CMD command to empty all EventViewer logs
+`for /F "tokens=*" %1 in ('wevtutil.exe el') DO wevtutil.exe cl "%1"`
