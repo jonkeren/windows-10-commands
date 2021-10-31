@@ -58,3 +58,44 @@ example, kill all Chrome processes:
 
 ### CMD command to empty all EventViewer logs
 `for /F "tokens=*" %1 in ('wevtutil.exe el') DO wevtutil.exe cl "%1"`
+
+### Auto install software packages with WinGet
+```
+winget install Google.Chrome
+winget install 7zip.7zip
+winget install KDE.digikam
+winget install XnSoft.XnViewMP
+winget install XnSoft.XnConvert
+winget install WhatsApp.WhatsApp
+winget install qBittorrent.qBittorrent
+winget install TimKosse.FileZilla.Client
+winget install HandBrake.HandBrake
+winget install SublimeHQ.SublimeText
+winget install Toggl.TogglDesktop
+winget install AntibodySoftware.WizTree
+winget install VideoLAN.VLC
+winget install Notepad++.Notepad++
+winget install Doxie.Doxie
+winget install alcpu.CoreTemp
+winget install calibre.calibre
+winget install voidtools.Everything
+winget install Foxit.FoxitReader
+winget install Microsoft.VC++2015-2019Redist-x86
+winget install Microsoft.VC++2015-2019Redist-x64
+winget install Microsoft.VC++2013Redist-x86
+winget install Microsoft.VC++2013Redist-x64
+winget install Microsoft.VC++2015-2022Redist-x64
+winget install Microsoft.VC++2015-2022Redist-x86
+winget install Microsoft.VC++2017Redist-x86
+winget install Microsoft.VC++2017Redist-x64
+winget install Microsoft.VC++2015Redist-x86
+winget install Microsoft.VC++2015Redist-x64
+winget install Microsoft.VC++2012Redist-x86
+winget install Microsoft.VC++2012Redist-x64
+winget install Microsoft.VC++2010Redist-x86
+winget install Microsoft.VC++2010Redist-x64
+winget install Microsoft.VC++2008Redist-x86
+winget install Microsoft.VC++2008Redist-x64
+winget install Microsoft.VC++2005Redist-x86
+winget install Microsoft.VC++2005Redist-x64
+```
