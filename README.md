@@ -74,6 +74,7 @@ winget install Klocman.BulkCrapUninstaller
 winget install TGRMNSoftware.BulkRenameUtility
 winget install HandBrake.HandBrake
 winget install SublimeHQ.SublimeText
+winget install dokan-dev.Dokany
 winget install Toggl.TogglDesktop
 winget install AntibodySoftware.WizTree
 winget install VideoLAN.VLC
