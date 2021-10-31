@@ -62,6 +62,7 @@ example, kill all Chrome processes:
 ### Auto install software packages with WinGet
 ```
 winget install Google.Chrome
+winget install Google.DriveFileStream
 winget install 7zip.7zip
 winget install KDE.digikam
 winget install XnSoft.XnViewMP
