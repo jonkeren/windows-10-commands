@@ -71,6 +71,7 @@ winget install WhatsApp.WhatsApp
 winget install qBittorrent.qBittorrent
 winget install TimKosse.FileZilla.Client
 winget install Klocman.BulkCrapUninstaller
+winget install TGRMNSoftware.BulkRenameUtility
 winget install HandBrake.HandBrake
 winget install SublimeHQ.SublimeText
 winget install Toggl.TogglDesktop
