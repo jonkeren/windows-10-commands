@@ -104,3 +104,5 @@ winget install Microsoft.VC++2008Redist-x64
 winget install Microsoft.VC++2005Redist-x86
 winget install Microsoft.VC++2005Redist-x64
 ```
+### WinGet upgrade all installed software
+`winget upgrade --all`
