@@ -65,6 +65,7 @@ winget install Google.Chrome
 winget install Google.DriveFileStream
 winget install 7zip.7zip
 winget install KDE.digikam
+winget install scottlerch.hosts-file-editor
 winget install XnSoft.XnViewMP
 winget install XnSoft.XnConvert
 winget install WhatsApp.WhatsApp
