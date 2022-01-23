@@ -1,5 +1,7 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
 
+### Powershell find invalid characters in path and/or file name:
+`gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
 
 ### Powershell recursively remove some files (also hidden and system) from subdirectories:
 `Get-ChildItem -File -Include *.DS_Store -Recurse -Force | Remove-Item -Force -Verbose`
