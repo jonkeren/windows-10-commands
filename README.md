@@ -108,3 +108,20 @@ winget install Microsoft.VC++2005Redist-x64
 ```
 ### WinGet upgrade all installed software
 `winget upgrade --all`
+
+### windows 10/11 enable all power plan options/settings (unhide)
+```
+$jos = "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings"
+$querylist =  reg query $jos
+foreach ($regfolder in $querylist){
+$querylist2 = reg query $regfolder
+    foreach($2ndfolder in $querylist2){
+    $active2 = $2ndfolder -replace "HKEY_LOCAL_MACHINE" , "HKLM:"
+    Get-ItemProperty -Path $active2
+    Set-ItemProperty -Path "$active2" -Name "Attributes" -Value '2'
+    }
+    $active = $regfolder -replace "HKEY_LOCAL_MACHINE" , "HKLM:"
+    Get-ItemProperty -Path $active
+    Set-ItemProperty -Path "$active" -Name "Attributes" -Value '2'
+}
+```
