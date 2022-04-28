@@ -109,7 +109,7 @@ winget install Microsoft.VC++2005Redist-x64
 ### WinGet upgrade all installed software
 `winget upgrade --all`
 
-### windows 10/11 enable all power plan options/settings (unhide)
+### Windows 10/11 enable all power plan options/settings (unhide)
 ```
 $jos = "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings"
 $querylist =  reg query $jos
