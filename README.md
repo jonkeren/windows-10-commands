@@ -61,6 +61,12 @@ example, kill all Chrome processes:
 ### CMD command to empty all EventViewer logs
 `for /F "tokens=*" %1 in ('wevtutil.exe el') DO wevtutil.exe cl "%1"`
 
+### Windows 10 enable "God mode" icon on desktop
+```
+$DesktopPath = [Environment]::GetFolderPath("Desktop");
+mkdir "$DesktopPath\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}"
+```
+
 ### Auto install software packages with WinGet
 ```
 winget install Google.Chrome
