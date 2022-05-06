@@ -80,6 +80,7 @@ winget install scottlerch.hosts-file-editor
 winget install XnSoft.XnViewMP
 winget install XnSoft.XnConvert
 winget install WhatsApp.WhatsApp
+winget install -e --id angryziber.AngryIPScanner
 winget install qBittorrent.qBittorrent
 winget install TimKosse.FileZilla.Client
 winget install Klocman.BulkCrapUninstaller
@@ -165,7 +166,6 @@ winget install Microsoft.VC++2005Redist-x64
 	New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" | Out-Null
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "StartupPage" -Type DWord -Value 1
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "AllItemsIconView" -Type DWord -Value 0
-
 
 # Show all tray icons
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
