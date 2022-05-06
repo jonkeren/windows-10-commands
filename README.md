@@ -66,6 +66,7 @@ example, kill all Chrome processes:
 winget install Google.Chrome
 winget install Google.DriveFileStream
 winget install 7zip.7zip
+winget install --id=Audacity.Audacity  -e
 winget install --id=rammichael.7+TaskbarTweaker  -e
 winget install slacktechnologies.slack
 winget install KDE.digikam
