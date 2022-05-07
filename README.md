@@ -49,11 +49,20 @@ example, kill all Chrome processes:
 
 `Dism.exe /Online /Cleanup-Image /CheckHealth`
 
+`DISM.exe /Online /Cleanup-Image /ScanHealth`
+
 `Dism.exe /Online /Cleanup-Image /RestoreHealth`
+
+`Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore`
 
 `Dism.exe /online /Cleanup-Image /StartComponentCleanup`
 
 `Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase`
+
+`Dism.exe /online /Cleanup-Image /SPSuperseded`
+
+`sfc /scannow`
+
 
 ### Powershell command to empty all EventViewer logs
 `Get-WinEvent -ListLog * | where {$_.RecordCount} | ForEach-Object -Process { [System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($_.LogName) }`
