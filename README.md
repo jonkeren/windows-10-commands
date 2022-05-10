@@ -81,6 +81,7 @@ mkdir "$DesktopPath\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}"
 winget install Google.Chrome
 winget install Google.DriveFileStream
 winget install 7zip.7zip
+winget install Microsoft.PowerToys --source winget
 winget install --id=Audacity.Audacity  -e
 winget install --id=rammichael.7+TaskbarTweaker  -e
 winget install slacktechnologies.slack
