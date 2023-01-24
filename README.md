@@ -29,6 +29,9 @@ Here are some Windows 10 CLI / Powershell commands I use once in a while. Using 
 
 `Get-AppxProvisionedPackage -Online | Out-GridView -PassThru | Remove-AppxProvisionedPackage -Online`
 
+### Powershell to download / install / upgrade all current Microsoft Visual C++ Redistributables
+`Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://vcredist.com/install.ps1'))`
+
 ### CMD Disk Cleanup old Drivers / Packages:
 `rundll32.exe pnpclean.dll,RunDLL_PnpClean /DRIVERS /MAXCLEAN`
 
