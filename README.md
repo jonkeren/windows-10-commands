@@ -286,4 +286,12 @@ reg add "HKCU\Software\Microsoft\GameBar" /v "AllowAutoGameMode" /t REG_DWORD /d
 ### Set Windows Store to DELL_Xps to download Dell Apps
 `REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Store" /v StoreContentModifier /f /t REG_SZ /d DELL_Xps`
 
+### Batch convert multiple PDF's to JPG's with CMD and Ghostscript
+```
+@echo off
+setlocal
 
+for %%I in (*.pdf) do (
+    gswin64c.exe -dNOPAUSE -dBATCH -dNumRenderingThreads=4 -sDEVICE=jpeg -r300 -dJPEGQ=80 -dFirstPage=1 -dLastPage=1 -sOutputFile="%%~nI_p%%02d.jpg" "%%~I"
+)
+```
