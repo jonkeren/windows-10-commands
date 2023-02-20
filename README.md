@@ -1,5 +1,15 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
 
+### CMD disable Windows 10/11 "Modern Standby" / "Connected Standby" (S0) and use S3
+```
+reg add HKLM\System\CurrentControlSet\Control\Power /v PlatformAoAcOverride /t REG_DWORD /d 0
+reg add HKLM\System\CurrentControlSet\Control\Power /v CsEnabled /t REG_DWORD /d 0
+reg add HKLM\System\CurrentControlSet\Control\Power /v EnforceDisconnectedStandby /t REG_DWORD /d 0
+POWERCFG /SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTIVITYINSTANDBY 0
+POWERCFG /SETDCVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTIVITYINSTANDBY 0
+# Last 2 lines for Dell XPS 9560/9570 at least
+```
+
 ### Powershell find invalid characters in path and/or file name:
 `gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
 
