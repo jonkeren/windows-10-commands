@@ -7,7 +7,6 @@ reg add HKLM\System\CurrentControlSet\Control\Power /v CsEnabled /t REG_DWORD /d
 reg add HKLM\System\CurrentControlSet\Control\Power /v EnforceDisconnectedStandby /t REG_DWORD /d 0
 POWERCFG /SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTIVITYINSTANDBY 0
 POWERCFG /SETDCVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTIVITYINSTANDBY 0
-# Last 2 lines for Dell XPS 9560/9570 at least
 ```
 
 ### Powershell find invalid characters in path and/or file name:
