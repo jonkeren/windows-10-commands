@@ -1,5 +1,11 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
 
+### Powershell create directories based on file extensions; and move the files to their extension directory. (This sorts files in one large directory into multiple subdirectories).
+```
+Get-ChildItem -File | % { Process { $_.Extension }} | Select -Unique | % { Process { New-Item $_ -ItemType Directory -Force }};
+Get-ChildItem -File | % { Process { Move-Item $_ -Destination $_.Extension -Force }};
+```
+
 ### CMD disable Windows 10/11 "Modern Standby" / "Connected Standby" (S0) and use S3
 ```
 reg add HKLM\System\CurrentControlSet\Control\Power /v PlatformAoAcOverride /t REG_DWORD /d 0
