@@ -15,6 +15,9 @@ POWERCFG /SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTI
 POWERCFG /SETDCVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTIVITYINSTANDBY 0
 ```
 
+### Disable Windows Defender (ToggleDefender)
+https://github.com/AveYo/LeanAndMean/blob/main/ToggleDefender.bat
+
 ### Powershell find invalid characters in path and/or file name:
 `gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
 
