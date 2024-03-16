@@ -1,5 +1,8 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
 
+### Install free Windows 10 HEVC Video Extensions from Device Manufacturer
+`start ms-windows-store://pdp/?ProductId=9n4wgh0z6vhq`
+
 ### Powershell create directories based on file extensions; and move the files to their extension directory. (This sorts files in one large directory into multiple subdirectories).
 ```
 Get-ChildItem -File | % { Process { $_.Extension }} | Select -Unique | % { Process { New-Item $_ -ItemType Directory -Force }};
