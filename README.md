@@ -1,5 +1,34 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
 
+### Powershell command to create Firewall block rules for all .exe files in the Adobe directories
+This will recurse the Adobe program directories, and automatically add an incoming and outgoing block rule in the Windows Firewall, to block all Adobe program's access to internet.
+```
+Get-ChildItem -Recurse -Path "C:\Program Files\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+
+Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+
+Get-ChildItem -Recurse -Path "C:\Program Files\Common Files\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+
+Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Common Files\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+```
+
+
 ### Install free Windows 10 HEVC Video Extensions from Device Manufacturer
 `start ms-windows-store://pdp/?ProductId=9n4wgh0z6vhq`
 
