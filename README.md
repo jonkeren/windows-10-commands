@@ -1,7 +1,7 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
 
 ### Powershell command to create Firewall block rules for all .exe files in a directory
-This will recurse the directorY, and automatically add an incoming and outgoing block rule in the Windows Firewall to block all program's access to internet.
+This will recurse the directory, and automatically add an incoming and outgoing block rule in the Windows Firewall to block all program's access to internet.
 ```
 Get-ChildItem -Recurse -Path "DIRECTORY" *.exe |
     Select-Object Name,FullName |
