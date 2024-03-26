@@ -111,56 +111,6 @@ $DesktopPath = [Environment]::GetFolderPath("Desktop");
 mkdir "$DesktopPath\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}"
 ```
 
-### Auto install software packages with WinGet
-```
-winget install Google.Chrome
-winget install Google.DriveFileStream
-winget install 7zip.7zip
-winget install Microsoft.PowerToys --source winget
-winget install --id=Audacity.Audacity  -e
-winget install --id=rammichael.7+TaskbarTweaker  -e
-winget install slacktechnologies.slack
-winget install KDE.digikam
-winget install scottlerch.hosts-file-editor
-winget install XnSoft.XnViewMP
-winget install XnSoft.XnConvert
-winget install WhatsApp.WhatsApp
-winget install -e --id angryziber.AngryIPScanner
-winget install qBittorrent.qBittorrent
-winget install TimKosse.FileZilla.Client
-winget install Klocman.BulkCrapUninstaller
-winget install TGRMNSoftware.BulkRenameUtility
-winget install HandBrake.HandBrake
-winget install SublimeHQ.SublimeText
-winget install dokan-dev.Dokany
-winget install Toggl.TogglDesktop
-winget install AntibodySoftware.WizTree
-winget install VideoLAN.VLC
-winget install Notepad++.Notepad++
-winget install Doxie.Doxie
-winget install alcpu.CoreTemp
-winget install calibre.calibre
-winget install voidtools.Everything
-winget install Foxit.FoxitReader
-winget install Microsoft.VC++2015-2019Redist-x86
-winget install Microsoft.VC++2015-2019Redist-x64
-winget install Microsoft.VC++2013Redist-x86
-winget install Microsoft.VC++2013Redist-x64
-winget install Microsoft.VC++2015-2022Redist-x64
-winget install Microsoft.VC++2015-2022Redist-x86
-winget install Microsoft.VC++2017Redist-x86
-winget install Microsoft.VC++2017Redist-x64
-winget install Microsoft.VC++2015Redist-x86
-winget install Microsoft.VC++2015Redist-x64
-winget install Microsoft.VC++2012Redist-x86
-winget install Microsoft.VC++2012Redist-x64
-winget install Microsoft.VC++2010Redist-x86
-winget install Microsoft.VC++2010Redist-x64
-winget install Microsoft.VC++2008Redist-x86
-winget install Microsoft.VC++2008Redist-x64
-winget install Microsoft.VC++2005Redist-x86
-winget install Microsoft.VC++2005Redist-x64
-```
 ### WinGet upgrade all installed software
 `winget upgrade --all`
 
