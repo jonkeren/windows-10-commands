@@ -26,6 +26,12 @@ POWERCFG -SETDCVALUEINDEX SCHEME_CURRENT SUB_NONE CONNECTIVITYINSTANDBY 0
 POWERCFG -SETACVALUEINDEX SCHEME_CURRENT SUB_NONE CONNECTIVITYINSTANDBY 0​
 ```
 
+### Windows 10 / 11 Automatic activation
+```
+irm https://get.activated.win | iex
+```
+See: https://github.com/massgravel/Microsoft-Activation-Scripts
+
 ### CMD disable Windows 10/11 "Modern Standby" / "Connected Standby" (S0) and use S3
 ```
 reg add HKLM\System\CurrentControlSet\Control\Power /v PlatformAoAcOverride /t REG_DWORD /d 0
