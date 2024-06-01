@@ -20,6 +20,12 @@ Get-ChildItem -File | % { Process { $_.Extension }} | Select -Unique | % { Proce
 Get-ChildItem -File | % { Process { Move-Item $_ -Destination $_.Extension -Force }};
 ```
 
+### Windows 10 / 11 keep modern standby, but disable network in standby.
+```
+POWERCFG -SETDCVALUEINDEX SCHEME_CURRENT SUB_NONE CONNECTIVITYINSTANDBY 0
+POWERCFG -SETACVALUEINDEX SCHEME_CURRENT SUB_NONE CONNECTIVITYINSTANDBY 0​
+```
+
 ### CMD disable Windows 10/11 "Modern Standby" / "Connected Standby" (S0) and use S3
 ```
 reg add HKLM\System\CurrentControlSet\Control\Power /v PlatformAoAcOverride /t REG_DWORD /d 0
