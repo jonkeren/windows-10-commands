@@ -11,6 +11,15 @@ Get-ChildItem -Recurse -Path "DIRECTORY" *.exe |
 ```
 Directories to block for Adobe software: `C:\Program Files\Adobe`, `C:\Program Files (x86)\Adobe`, `C:\Program Files\Common Files\Adobe`, `C:\Program Files (x86)\Common Files\Adobe`.
 
+### Windows 10/11 stop Adobe unnecessary Adobe Background processes
+Rename these 4 exe-files.
+```
+- C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe
+- C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe
+- C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe
+- C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe
+```
+
 ### Install free Windows 10 HEVC Video Extensions from Device Manufacturer
 `start ms-windows-store://pdp/?ProductId=9n4wgh0z6vhq`
 
