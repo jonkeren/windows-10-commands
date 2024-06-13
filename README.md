@@ -20,6 +20,14 @@ Rename these 4 exe-files.
 - C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe
 ```
 
+### Make Windows Explorer faster 
+Windows Explorer can be really slow if the folder has a lot of files.
+Can be solved with:
+```
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell]
+"FolderType"="NotSpecified"
+```
+
 ### Install free Windows 10 HEVC Video Extensions from Device Manufacturer
 `start ms-windows-store://pdp/?ProductId=9n4wgh0z6vhq`
 
