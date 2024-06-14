@@ -58,6 +58,16 @@ POWERCFG /SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTI
 POWERCFG /SETDCVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTIVITYINSTANDBY 0
 ```
 
+### Windows 10 fix Logitech MX Anywhere 3 stutter/lag using registry change
+Go to `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_8087&PID_0026\5&3b777946&0&14\Device Parameters`.
+Device name and numer might be different. In this case the device name is "Intel(R) Wireless Bluetooth(R)".
+Add 3 key/values:
+```
+"DeviceSelectiveSuspended"=dword:00000000 
+"SelectiveSuspendEnabled"=dword:00000000 
+"SelectiveSuspendSupported"=dword:00000000
+```
+
 ### Disable Windows Defender (ToggleDefender)
 https://github.com/AveYo/LeanAndMean/blob/main/ToggleDefender.bat
 
