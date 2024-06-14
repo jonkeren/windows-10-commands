@@ -68,8 +68,10 @@ Add 3 key/values:
 "SelectiveSuspendSupported"=dword:00000000
 ```
 
-### Disable Windows Defender (ToggleDefender)
+### Disable Windows Defender (ToggleDefender and/or DefenderControl)
 https://github.com/AveYo/LeanAndMean/blob/main/ToggleDefender.bat
+
+https://www.sordum.org/9480/defender-control-v2-1/
 
 ### Powershell find invalid characters in path and/or file name:
 `gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
