@@ -184,6 +184,8 @@ for %%I in (*.pdf) do (
 ### Windows 10/11 misc. tweaks, settings, debloat. 
 This is a fairly long list. I run these normally after a fresh Windows install. 
 You can copy / paste this into an admin-Powershell window. All at once, or individually of course. Or, save as a .ps1 file and execute.
+See also here: https://gist.github.com/jonkeren/537dba7f7cf84e319c634f7e9af4f2f8
+
 ```
 # Disable Xbox features
 	Get-AppxPackage "Microsoft.XboxApp" | Remove-AppxPackage
