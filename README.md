@@ -211,7 +211,11 @@ You can copy / paste this into an admin-Powershell window. All at once, or indiv
 	reg.exe add "HKLM\System\GameConfigStore" /v GameDVR_FSEBehavior /t REG_DWORD /d 2 /f
 	reg.exe add "HKLM\System\GameConfigStore" /v GameDVR_HonorUserFSEBehaviorMode /t REG_DWORD /d 1 /f
 
-### Windows 10 remove Xbox bloatware
+# Turn off the "Try the new Outlook" toggle that turns Outlook Desktop into the new Desktop Web version.
+	if((Test-Path -LiteralPath "HKCU:\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\General") -ne $true) { New-Item "HKCU:\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\General" -force -ea SilentlyContinue };
+	New-ItemProperty -LiteralPath 'HKCU:\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\General' -Name 'HideNewOutlookToggle' -Value 1 -PropertyType DWord -Force -ea SilentlyContinue;
+
+# Windows 10 remove Xbox bloatware
 	reg.exe add "HKLM\System\CurrentControlSet\Services\xbgm" /v "Start" /t REG_DWORD /d "4" /f
 	Stop-Service -Name XblAuthManager
 	Set-Service -Name XblAuthManager -StartupType Disabled
