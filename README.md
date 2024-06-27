@@ -76,6 +76,9 @@ https://www.sordum.org/9480/defender-control-v2-1/
 ### Powershell find invalid characters in path and/or file name:
 `gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
 
+### Powershell replace "right single quotation mark" in file names with normal tick/apostrophe
+`Get-ChildItem -Recurse | where {$_.Name -match "\u2019"} | Rename-Item -NewName { $_.Name -Replace "\u2019","'" } -Passthru`
+
 ### Powershell recursively remove some files (also hidden and system) from subdirectories:
 `Get-ChildItem -File -Include *.DS_Store -Recurse -Force | Remove-Item -Force -Verbose`
 
