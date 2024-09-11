@@ -189,4 +189,26 @@ This is a fairly long list. I run these normally after a fresh Windows install.
 You can copy / paste this into an admin-Powershell window. All at once, or individually of course. Or, save as a .ps1 file and execute.
 See here: --> https://gist.github.com/jonkeren/537dba7f7cf84e319c634f7e9af4f2f8
 
+### Powershell: Completely stop Windows Update from running and rebooting.
+```
+$WindowsUpdatePath = "HKLM:SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\"
+$AutoUpdatePath    = "HKLM:SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
+Write-Host "[+] Disable AutoUpdate:"
+Set-ItemProperty -Path $AutoUpdatePath -Name NoAutoUpdate -Value 1
+Write-Host "[+] Disabel Windows update ScheduledTask"
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\WindowsUpdate\" | Disable-ScheduledTask
+Write-Host "[+] Take Windows update  Orchestrator ownership"
+takeown /F C:\Windows\System32\Tasks\Microsoft\Windows\UpdateOrchestrator /A /R
+icacls C:\Windows\System32\Tasks\Microsoft\Windows\UpdateOrchestrator /grant Administrators:F /T
+Write-Host "[+] List Windows update  Orchestrator ownership"
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\UpdateOrchestrator\" | Disable-ScheduledTask
+Write-Host "[+] Disable Windows Update Server AutoStartup"
+Set-Service wuauserv -StartupType Disabled
+sc.exe config wuauserv start=disabled 
+Write-Host "[+] Disable Windows Update Running Service"
+Stop-Service wuauserv 
+sc.exe stop wuauserv 
+Write-Host "[+] Check Windows Update Service state"
+sc.exe query wuauserv | findstr "STATE"
+```
 
