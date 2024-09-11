@@ -209,4 +209,9 @@ Stop-Service wuauserv
 sc.exe stop wuauserv 
 takeown /f c:\windows\system32\WaaSMedicSvc.dll
 ```
+### Powershell one liner to set Windows 10 updates to pause (suspend) for +365 days from now (today):
+
+```
+$pause = (Get-Date).AddDays(365); $pause = $pause.ToUniversalTime().ToString( "yyyy-MM-ddTHH:mm:ssZ" ); Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings' -Name 'PauseUpdatesExpiryTime' -Value $pause
+```
 
