@@ -196,6 +196,10 @@ $WindowsUpdatePath = "HKLM:SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\"
 $AutoUpdatePath    = "HKLM:SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
 Set-ItemProperty -Path $AutoUpdatePath -Name NoAutoUpdate -Value 1
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\WindowsUpdate\" | Disable-ScheduledTask
+Set-Service UsoSvc -StartupType Disabled -PassThru | Stop-Service
+Set-ItemProperty -Path "HKLM:SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name NoAutoUpdate -Value 1
+Set-ItemProperty -Path "HKLM:SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name AUOptions -Value 2
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc\" -Name Start -Value 4
 takeown /F C:\Windows\System32\Tasks\Microsoft\Windows\UpdateOrchestrator /A /R
 icacls C:\Windows\System32\Tasks\Microsoft\Windows\UpdateOrchestrator /grant Administrators:F /T
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\UpdateOrchestrator\" | Disable-ScheduledTask
@@ -203,6 +207,6 @@ Set-Service wuauserv -StartupType Disabled
 sc.exe config wuauserv start=disabled 
 Stop-Service wuauserv 
 sc.exe stop wuauserv 
-sc.exe query wuauserv | findstr "STATE"
+takeown /f c:\windows\system32\WaaSMedicSvc.dll
 ```
 
