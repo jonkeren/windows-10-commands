@@ -69,9 +69,11 @@ Add 3 key/values:
 ```
 
 ### Disable Windows Defender (ToggleDefender and/or DefenderControl)
-https://github.com/AveYo/LeanAndMean/blob/main/ToggleDefender.bat
+- https://github.com/AveYo/LeanAndMean/blob/main/ToggleDefender.bat
+- https://www.sordum.org/9480/defender-control-v2-1/
 
-https://www.sordum.org/9480/defender-control-v2-1/
+### Remove Windows Defender and all services & files related to Windows Defender
+- https://github.com/ionuttbara/windows-defender-remover
 
 ### Powershell find invalid characters in path and/or file name:
 `gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
