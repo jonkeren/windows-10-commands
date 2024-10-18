@@ -1,5 +1,14 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
 
+### Powershell list status of all devices that have the option "Power Management - Allow the computer to turn off this device to save power"
+`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI`
+
+### Powershell automatically enable "Power Management - Allow the computer to turn off this device to save power" (set check box) for all devices
+`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $true}`
+
+### Powershell automatically disable "Power Management - Allow the computer to turn off this device to save power" (uncheck box) for all devices
+`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $false}`
+
 ### Powershell command to create Firewall block rules for all .exe files in a directory
 This will recurse the directory, and automatically add an incoming and outgoing block rule in the Windows Firewall to block all program's access to internet.
 ```
