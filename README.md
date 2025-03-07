@@ -1,4 +1,6 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
+### Stop Microsoft Edge popups asking for "default browser"
+`reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge /v DefaultBrowserSettingEnabled /t REG_DWORD /d 0 /f`
 
 ### Powershell list status of all devices that have the option "Power Management - Allow the computer to turn off this device to save power"
 `Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI`
