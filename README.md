@@ -87,6 +87,9 @@ Add 3 key/values:
 ### Remove Windows Defender and all services & files related to Windows Defender
 - https://github.com/ionuttbara/windows-defender-remover
 
+### Remove and disable all CoPilot stuff in Windows 11
+- https://github.com/zoicware/RemoveWindowsAI
+
 ### Powershell find invalid characters in path and/or file name:
 `gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
 
