@@ -33,11 +33,38 @@ Rename these 5 exe-files.
 - C:\Program Files (x86)\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe
 ```
 
-### Make Windows Explorer much faster 
+### Make Windows Explorer faster 
 Windows Explorer can be really slow if the folder has a lot of files.
 Can be solved with:
 ```
 reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" /v "FolderType" /t REG_SZ /d "NotSpecified" /f
+```
+
+### Delete unnessecary services from Killer, Intel, and Nvidia
+This is for my pc driver setup currently. You may have different services.
+```
+sc config "cplspcon" start= disabled
+sc stop "cplspcon"
+sc config "igfxCUIService2.0.0.0" start= disabled
+sc stop "igfxCUIService2.0.0.0"
+sc config "IntelGraphicsSoftwareService" start= disabled
+sc stop "IntelGraphicsSoftwareService"
+sc config "PIEServiceNew" start= disabled
+sc stop "PIEServiceNew"
+sc config "Killer Analytics Service" start= disabled
+sc stop "Killer Analytics Service"
+sc config "KNDBWM" start= disabled
+sc stop "KNDBWM"
+sc config "Killer Network Service" start= disabled
+sc stop "Killer Network Service"
+sc config "Killer Provider Data Helper Service" start= disabled
+sc stop "Killer Provider Data Helper Service"
+sc config "KAPSService" start= disabled
+sc stop "KAPSService"
+sc config "NVDisplay.ContainerLocalSystem" start= disabled
+sc stop "NVDisplay.ContainerLocalSystem"
+sc config "IntelAudioService" start= disabled
+sc stop "IntelAudioService"
 ```
 
 ### Install free Windows 10 HEVC Video Extensions from Device Manufacturer
