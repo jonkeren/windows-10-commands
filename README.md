@@ -12,16 +12,32 @@ Here are some Windows 10 CLI / Powershell commands I use once in a while. Using 
 ### Powershell automatically disable "Power Management - Allow the computer to turn off this device to save power" (uncheck box) for all devices
 `Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $false}`
 
-### Powershell command to create Firewall block rules for all .exe files in a directory
+## Adobe
+
+### Powershell command to create Firewall block rules for all .exe files in Adobe directories
 This will recurse the directory, and automatically add an incoming and outgoing block rule in the Windows Firewall to block all program's access to internet.
 ```
-Get-ChildItem -Recurse -Path "DIRECTORY" *.exe |
+Get-ChildItem -Recurse -Path "C:\Program Files\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+Get-ChildItem -Recurse -Path "C:\Program Files\Common Files\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Common Files\Adobe" *.exe |
     Select-Object Name,FullName |
     ForEach-Object `
     {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
     New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
 ```
-Directories to block for Adobe software: `C:\Program Files\Adobe`, `C:\Program Files (x86)\Adobe`, `C:\Program Files\Common Files\Adobe`, `C:\Program Files (x86)\Common Files\Adobe`.
 
 ### Windows 10/11 stop Adobe unnecessary Adobe Background processes
 Rename these 5 exe-files.
