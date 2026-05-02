@@ -40,13 +40,13 @@ Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Common Files\Adobe" *.exe |
 ```
 
 ### Windows 10/11 stop Adobe unnecessary Adobe Background processes
-Rename these 5 exe-files.
+Run this to rename these 5 exe-files.
 ```
-- C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe
-- C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe
-- C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe
-- C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe
-- C:\Program Files (x86)\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe
+move "C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe" "C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe.jos"
+move "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
+move "C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
+move "C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
+move "C:\Program Files (x86)\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
 ```
 
 ### Make Windows Explorer faster 
