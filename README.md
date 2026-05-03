@@ -1,53 +1,15 @@
 Here are some Windows 10 CLI / Powershell commands I use once in a while. Using this as my personal notepad, so to speak; might be useful for someone.
+
+## Windows 11 several settings & tweaks
+
 ### Stop Microsoft Edge popups asking for "default browser"
 `reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge /v DefaultBrowserSettingEnabled /t REG_DWORD /d 0 /f`
 `reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge /v DefaultBrowserSettingsCampaignEnabled /t REG_DWORD /d 0 /f`
 
-### Powershell list status of all devices that have the option "Power Management - Allow the computer to turn off this device to save power"
-`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI`
-
-### Powershell automatically enable "Power Management - Allow the computer to turn off this device to save power" (set check box) for all devices
-`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $true}`
-
-### Powershell automatically disable "Power Management - Allow the computer to turn off this device to save power" (uncheck box) for all devices
-`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $false}`
-
-## Adobe
-
-### Powershell command to create Firewall block rules for all .exe files in Adobe directories
-This will recurse the directory, and automatically add an incoming and outgoing block rule in the Windows Firewall to block all program's access to internet.
-```
-Get-ChildItem -Recurse -Path "C:\Program Files\Adobe" *.exe |
-    Select-Object Name,FullName |
-    ForEach-Object `
-    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
-    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
-Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Adobe" *.exe |
-    Select-Object Name,FullName |
-    ForEach-Object `
-    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
-    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
-Get-ChildItem -Recurse -Path "C:\Program Files\Common Files\Adobe" *.exe |
-    Select-Object Name,FullName |
-    ForEach-Object `
-    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
-    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
-Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Common Files\Adobe" *.exe |
-    Select-Object Name,FullName |
-    ForEach-Object `
-    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
-    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
-```
-
-### Windows 10/11 stop Adobe unnecessary Adobe Background processes
-Run this to rename these 5 exe-files.
-```
-move "C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe" "C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe.jos"
-move "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
-move "C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
-move "C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
-move "C:\Program Files (x86)\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
-```
+### Windows 10 / 11 misc. tweaks, settings, debloat. 
+This is a fairly long list. I run these normally after a fresh Windows install. 
+You can copy / paste this into an admin-Powershell window. All at once, or individually of course. Or, save as a .ps1 file and execute.
+See here: --> https://gist.github.com/jonkeren/537dba7f7cf84e319c634f7e9af4f2f8
 
 ### Make Windows Explorer faster 
 Windows Explorer can be really slow if the folder has a lot of files.
@@ -86,11 +48,6 @@ sc stop "IntelAudioService"
 ### Install free Windows 10 HEVC Video Extensions from Device Manufacturer
 `start ms-windows-store://pdp/?ProductId=9n4wgh0z6vhq`
 
-### Powershell create directories based on file extensions; and move the files to their extension directory. (This sorts files in one large directory into multiple subdirectories).
-```
-Get-ChildItem -File | % { Process { $_.Extension }} | Select -Unique | % { Process { New-Item $_ -ItemType Directory -Force }};
-Get-ChildItem -File | % { Process { Move-Item $_ -Destination $_.Extension -Force }};
-```
 
 ### Windows 10 / 11 keep modern standby, but disable network in standby.
 ```
@@ -104,7 +61,7 @@ irm https://get.activated.win | iex
 ```
 See: https://github.com/massgravel/Microsoft-Activation-Scripts
 
-### CMD disable Windows 10/11 "Modern Standby" / "Connected Standby" (S0) and use S3
+### CMD disable Windows 10 / 11 "Modern Standby" / "Connected Standby" (S0) and use S3
 ```
 reg add HKLM\System\CurrentControlSet\Control\Power /v PlatformAoAcOverride /t REG_DWORD /d 0
 reg add HKLM\System\CurrentControlSet\Control\Power /v CsEnabled /t REG_DWORD /d 0
@@ -113,7 +70,7 @@ POWERCFG /SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTI
 POWERCFG /SETDCVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTIVITYINSTANDBY 0
 ```
 
-### Windows 10 fix Logitech MX Anywhere 3 stutter/lag using registry change
+### Windows 10 / 11 fix Logitech MX Anywhere 3 stutter/lag using registry change
 Go to `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_8087&PID_0026\5&3b777946&0&14\Device Parameters`.
 Device name and numer might be different. In this case the device name is "Intel(R) Wireless Bluetooth(R)".
 Add 3 key/values:
@@ -122,8 +79,7 @@ Add 3 key/values:
 "SelectiveSuspendEnabled"=dword:00000000 
 "SelectiveSuspendSupported"=dword:00000000
 ```
-
-### Disable Windows Defender (ToggleDefender and/or DefenderControl)
+### Windows 10 / 11 Disable Windows Defender (ToggleDefender and/or DefenderControl)
 - https://github.com/AveYo/LeanAndMean/blob/main/ToggleDefender.bat
 - https://www.sordum.org/9480/defender-control-v2-1/
 
@@ -132,31 +88,6 @@ Add 3 key/values:
 
 ### Remove and disable all CoPilot stuff in Windows 11
 - https://github.com/zoicware/RemoveWindowsAI
-
-### Powershell find invalid characters in path and/or file name:
-`gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
-
-### Powershell replace "right single quotation mark" in file names with normal tick/apostrophe
-`Get-ChildItem -Recurse | where {$_.Name -match "\u2019"} | Rename-Item -NewName { $_.Name -Replace "\u2019","'" } -Passthru`
-
-### Powershell recursively remove some files (also hidden and system) from subdirectories:
-`Get-ChildItem -File -Include *.DS_Store -Recurse -Force | Remove-Item -Force -Verbose`
-
-### CMD Make all Onedrive files and folders available locally, recursively:
-`attrib +p -u /s /d`
-
-### CMD Make all Onedrive files and folders available in the cloud only, recursively:
-`attrib -p +u /s /d`
-
-### Powershell delete all empty directories:
-`Get-ChildItem -Recurse -Force . | where { $_.PSISContainer -and @( $_ | Get-ChildItem ).Count -eq 0 } | Remove-Item -Verbose -Force`
-
-### Powershell rename all jpg images and videos, to strip the "IMG_" and "VID_" prefix, and to replace underscores with dashes:
-`Get-ChildItem -Recurse 'IMG_20*.*' | Rename-Item -NewName { $_.Name -Replace 'IMG_20','20' } -Passthru`
-
-`Get-ChildItem -Recurse 'VID_20*.*' | Rename-Item -NewName { $_.Name -Replace 'VID_20','20' } -Passthru`
-
-`Get-ChildItem -Recurse '20??????_*.*' | Rename-Item -NewName { $_.Name -Replace '_','-' } -PassThru`
 
 ### Powershell Windows 10 debloat, with Gridview popup (so you can select which apps to remove):
 `Get-AppXPackage | Out-GridView -Passthru | Remove-AppXPackage`
@@ -176,12 +107,6 @@ Add 3 key/values:
 
 `sc config “wsearch” start=delayed-auto && sc start “wsearch”`
 
-### CMD kill all tasks with a task name:
-`taskkill /F /IM <NAME>.exe /T`
-
-example, kill all Chrome processes:
-
-`taskkill /F /IM chrome.exe /T`
 
 ### SFC / DISM commands
 `sfc /scannow`
@@ -202,14 +127,7 @@ example, kill all Chrome processes:
 
 `sfc /scannow`
 
-
-### Powershell command to empty all EventViewer logs
-`Get-WinEvent -ListLog * | where {$_.RecordCount} | ForEach-Object -Process { [System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($_.LogName) }`
-
-### CMD command to empty all EventViewer logs
-`for /F "tokens=*" %1 in ('wevtutil.exe el') DO wevtutil.exe cl "%1"`
-
-### Windows 10 enable "God mode" icon on desktop
+### Windows 10 / 11 enable "God mode" icon on desktop
 ```
 $DesktopPath = [Environment]::GetFolderPath("Desktop");
 mkdir "$DesktopPath\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}"
@@ -233,21 +151,6 @@ $querylist2 = reg query $regfolder
 ```
 ### Set Windows Store to DELL_Xps to download Dell Apps
 `REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Store" /v StoreContentModifier /f /t REG_SZ /d DELL_Xps`
-
-### Batch convert multiple PDF's to JPG's with CMD and Ghostscript
-```
-@echo off
-setlocal
-
-for %%I in (*.pdf) do (
-    gswin64c.exe -dNOPAUSE -dBATCH -dNumRenderingThreads=4 -sDEVICE=jpeg -r300 -dJPEGQ=80 -dFirstPage=1 -dLastPage=1 -sOutputFile="%%~nI_p%%02d.jpg" "%%~I"
-)
-```
-
-### Windows 10/11 misc. tweaks, settings, debloat. 
-This is a fairly long list. I run these normally after a fresh Windows install. 
-You can copy / paste this into an admin-Powershell window. All at once, or individually of course. Or, save as a .ps1 file and execute.
-See here: --> https://gist.github.com/jonkeren/537dba7f7cf84e319c634f7e9af4f2f8
 
 ### Powershell: Completely stop Windows Update from running and rebooting.
 This disables the Windows Update scheduled tasks, takes ownershop of the UpdateOrchestrator dir, disables startup of `wuauserv` and set it to disabled.
@@ -275,3 +178,113 @@ takeown /f c:\windows\system32\WaaSMedicSvc.dll
 $pause = (Get-Date).AddDays(365); $pause = $pause.ToUniversalTime().ToString( "yyyy-MM-ddTHH:mm:ssZ" ); Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings' -Name 'PauseUpdatesExpiryTime' -Value $pause
 ```
 
+
+
+
+
+
+
+## Several Powershell / cmd commands that might come in handy
+
+### Powershell create directories based on file extensions; and move the files to their extension directory. (This sorts files in one large directory into multiple subdirectories).
+```
+Get-ChildItem -File | % { Process { $_.Extension }} | Select -Unique | % { Process { New-Item $_ -ItemType Directory -Force }};
+Get-ChildItem -File | % { Process { Move-Item $_ -Destination $_.Extension -Force }};
+```
+
+### Powershell list status of all devices that have the option "Power Management - Allow the computer to turn off this device to save power"
+`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI`
+
+### Powershell automatically enable "Power Management - Allow the computer to turn off this device to save power" (set check box) for all devices
+`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $true}`
+
+### Powershell automatically disable "Power Management - Allow the computer to turn off this device to save power" (uncheck box) for all devices
+`Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $false}`
+
+### Batch convert multiple PDF's to JPG's with CMD and Ghostscript
+```
+@echo off
+setlocal
+
+for %%I in (*.pdf) do (
+    gswin64c.exe -dNOPAUSE -dBATCH -dNumRenderingThreads=4 -sDEVICE=jpeg -r300 -dJPEGQ=80 -dFirstPage=1 -dLastPage=1 -sOutputFile="%%~nI_p%%02d.jpg" "%%~I"
+)
+```
+
+### Powershell find invalid characters in path and/or file name:
+`gci -recurse  . | where {$_.Name -match "[^\u0000-\u00FF]"} | select -expand FullName`
+
+### Powershell replace "right single quotation mark" in file names with normal tick/apostrophe
+`Get-ChildItem -Recurse | where {$_.Name -match "\u2019"} | Rename-Item -NewName { $_.Name -Replace "\u2019","'" } -Passthru`
+
+### Powershell recursively remove some files (also hidden and system) from subdirectories:
+`Get-ChildItem -File -Include *.DS_Store -Recurse -Force | Remove-Item -Force -Verbose`
+
+### CMD Make all Onedrive files and folders available locally, recursively:
+`attrib +p -u /s /d`
+
+### CMD Make all Onedrive files and folders available in the cloud only, recursively:
+`attrib -p +u /s /d`
+
+### Powershell delete all empty directories:
+`Get-ChildItem -Recurse -Force . | where { $_.PSISContainer -and @( $_ | Get-ChildItem ).Count -eq 0 } | Remove-Item -Verbose -Force`
+
+### Powershell rename all jpg images and videos, to strip the "IMG_" and "VID_" prefix, and to replace underscores with dashes:
+`Get-ChildItem -Recurse 'IMG_20*.*' | Rename-Item -NewName { $_.Name -Replace 'IMG_20','20' } -Passthru`
+
+`Get-ChildItem -Recurse 'VID_20*.*' | Rename-Item -NewName { $_.Name -Replace 'VID_20','20' } -Passthru`
+
+`Get-ChildItem -Recurse '20??????_*.*' | Rename-Item -NewName { $_.Name -Replace '_','-' } -PassThru`
+
+### CMD kill all tasks with a task name:
+`taskkill /F /IM <NAME>.exe /T`
+
+### Powershell command to empty all EventViewer logs
+`Get-WinEvent -ListLog * | where {$_.RecordCount} | ForEach-Object -Process { [System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($_.LogName) }`
+
+### CMD command to empty all EventViewer logs
+`for /F "tokens=*" %1 in ('wevtutil.exe el') DO wevtutil.exe cl "%1"`
+
+
+
+
+
+
+
+
+## Adobe stuff
+
+### Powershell command to create Firewall block rules for all .exe files in Adobe directories
+This will recurse the directory, and automatically add an incoming and outgoing block rule in the Windows Firewall to block all program's access to internet.
+```
+Get-ChildItem -Recurse -Path "C:\Program Files\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+Get-ChildItem -Recurse -Path "C:\Program Files\Common Files\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Common Files\Adobe" *.exe |
+    Select-Object Name,FullName |
+    ForEach-Object `
+    {New-NetFirewallRule -DisplayName "Block $($_.Name) Inbound" -Direction Inbound -Program "$($_.FullName)" -Action Block;
+    New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
+```
+
+### Windows 10/11 stop Adobe unnecessary Adobe Background processes
+Run this to rename these 5 exe-files.
+```
+move "C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe" "C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe.jos"
+move "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
+move "C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
+move "C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
+move "C:\Program Files (x86)\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe" "C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe.jos"
+```
