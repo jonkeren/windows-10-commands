@@ -201,7 +201,7 @@ Get-ChildItem -File | % { Process { Move-Item $_ -Destination $_.Extension -Forc
 ### Powershell automatically disable "Power Management - Allow the computer to turn off this device to save power" (uncheck box) for all devices
 `Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $false}`
 
-### Batch convert multiple PDF's to JPG's with CMD and Ghostscript
+### CMD Batch convert multiple PDF's to JPG's with Ghostscript
 ```
 @echo off
 setlocal
@@ -248,6 +248,19 @@ for %%I in (*.pdf) do (
 ### CMD Batch convert *.opus into *.mp3 using ffmpeg
 `for %i in (*.opus) do ffmpeg -i "%i" -q:a 2 "%~ni.mp3"`
 
+### Powershell move files to date-based subdirectories, based on the first characters (date) of the file name
+This moves files names like `20251016-blabla.mp3` to a subfolder `2025\10\16`.
+```
+$Source = 'SOURCE FOLDER'
+GEt-ChildItem $Source *.mp3 | ForEach{
+   $Destination = ($_.Name.Substring(0,4)),($_.Name.Substring(4,2)),($_.Name.Substring(6,2)) -join '\'
+   If ( -not ( Test-Path $Destination )) {
+       mkdir $Destination | out-null
+   }
+   Move-Item $_.FullName $Destination
+   echo $Destination $_.FullName
+}
+```
 
 
 
