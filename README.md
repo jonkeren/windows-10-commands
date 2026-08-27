@@ -245,7 +245,8 @@ for %%I in (*.pdf) do (
 ### CMD command to empty all EventViewer logs
 `for /F "tokens=*" %1 in ('wevtutil.exe el') DO wevtutil.exe cl "%1"`
 
-
+### CMD Batch convert *.opus into *.mp3 using ffmpeg
+`for %i in (*.opus) do ffmpeg -i "%i" -q:a 2 "%~ni.mp3"`
 
 
 
