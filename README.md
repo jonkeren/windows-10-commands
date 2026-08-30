@@ -11,12 +11,17 @@ This is a fairly long list. I run these normally after a fresh Windows install.
 You can copy / paste this into an admin-Powershell window. All at once, or individually of course. Or, save as a .ps1 file and execute.
 See here: --> https://gist.github.com/jonkeren/537dba7f7cf84e319c634f7e9af4f2f8
 
-### Make Windows Explorer faster 
+### Windows 11 Make Windows Explorer faster 
 Windows Explorer can be really slow if the folder has a lot of files.
 Can be solved with:
 ```
 reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" /v "FolderType" /t REG_SZ /d "NotSpecified" /f
 ```
+
+### Windows 11 improve speed of navigationg Onedrive folders in Explorer
+On Windows 11 Onedrive is very slow accessing through the main window Onedrive or SharePointsync'd folders. Using procmon, Explorer.exe is losing 5-6 seconds doing a lot of ReqQueryKey on the `HKCU\Software\Classes\`  tree. It boils down on changing permission to full control for the ondrivesync entries here: `Computer\HKEY_CLASSES_ROOT\PackagedCom\Package\Microsoft.OneDriveSync_xxxxxxxx` to the "Everyone" account. No more entries logged on HKCU\Software\Classes tree. This speeds up Navigating Onedrive folders in Explorer by at least 10x. This script sets the rights on those registry keys, for all keys starting with `Microsoft.OneDriveSync_`. 
+Also after a reboot it persists. You maybe should run this again after a new version of OneDrive is installed, and a new key (with another version number) is created.
+Script here: --> https://github.com/jonkeren/windows-10-commands/blob/master/Fix-OneDrive-Speed-Using-Registry.ps1
 
 ### Delete unnessecary services from Killer, Intel, and Nvidia
 This is for my pc driver setup currently. You may have different services.
