@@ -6,7 +6,7 @@ Here are some Windows 10 CLI / Powershell commands I use once in a while. Using 
 `reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge /v DefaultBrowserSettingEnabled /t REG_DWORD /d 0 /f`
 `reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge /v DefaultBrowserSettingsCampaignEnabled /t REG_DWORD /d 0 /f`
 
-### Windows 10 / 11 misc. tweaks, settings, debloat. 
+### Windows 11 misc. tweaks, settings, debloat. 
 This is a fairly long list. I run these normally after a fresh Windows install. 
 You can copy / paste this into an admin-Powershell window. All at once, or individually of course. Or, save as a .ps1 file and execute.
 See here: --> https://gist.github.com/jonkeren/537dba7f7cf84e319c634f7e9af4f2f8
@@ -23,7 +23,7 @@ On Windows 11 Onedrive is very slow accessing through the main window Onedrive o
 Also after a reboot it persists. You maybe should run this again after a new version of OneDrive is installed, and a new key (with another version number) is created.
 Script here: --> https://github.com/jonkeren/windows-10-commands/blob/master/Fix-OneDrive-Speed-Using-Registry.ps1
 
-### Delete unnessecary services from Killer, Intel, and Nvidia
+### Windows 11 Delete unnessecary services from Killer, Intel, and Nvidia
 This is for my pc driver setup currently. You may have different services.
 ```
 sc config "cplspcon" start= disabled
@@ -54,19 +54,19 @@ sc stop "IntelAudioService"
 `start ms-windows-store://pdp/?ProductId=9n4wgh0z6vhq`
 
 
-### Windows 10 / 11 keep modern standby, but disable network in standby.
+### Windows 11 keep modern standby, but disable network in standby.
 ```
 POWERCFG -SETDCVALUEINDEX SCHEME_CURRENT SUB_NONE CONNECTIVITYINSTANDBY 0
 POWERCFG -SETACVALUEINDEX SCHEME_CURRENT SUB_NONE CONNECTIVITYINSTANDBY 0​
 ```
 
-### Windows 10 / 11 Automatic activation
+### Windows 11 Automatic activation
 ```
 irm https://get.activated.win | iex
 ```
 See: https://github.com/massgravel/Microsoft-Activation-Scripts
 
-### CMD disable Windows 10 / 11 "Modern Standby" / "Connected Standby" (S0) and use S3
+### CMD disable Windows 11 "Modern Standby" / "Connected Standby" (S0) and use S3
 ```
 reg add HKLM\System\CurrentControlSet\Control\Power /v PlatformAoAcOverride /t REG_DWORD /d 0
 reg add HKLM\System\CurrentControlSet\Control\Power /v CsEnabled /t REG_DWORD /d 0
@@ -75,7 +75,7 @@ POWERCFG /SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTI
 POWERCFG /SETDCVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_NONE CONNECTIVITYINSTANDBY 0
 ```
 
-### Windows 10 / 11 fix Logitech MX Anywhere 3 stutter/lag using registry change
+### Windows 11 fix Logitech MX Anywhere 3 stutter/lag using registry change
 Go to `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_8087&PID_0026\5&3b777946&0&14\Device Parameters`.
 Device name and numer might be different. In this case the device name is "Intel(R) Wireless Bluetooth(R)".
 Add 3 key/values:
@@ -84,17 +84,17 @@ Add 3 key/values:
 "SelectiveSuspendEnabled"=dword:00000000 
 "SelectiveSuspendSupported"=dword:00000000
 ```
-### Windows 10 / 11 Disable Windows Defender (ToggleDefender and/or DefenderControl)
+### Windows 11 Disable Windows Defender (ToggleDefender and/or DefenderControl)
 - https://github.com/AveYo/LeanAndMean/blob/main/ToggleDefender.bat
 - https://www.sordum.org/9480/defender-control-v2-1/
 
-### Remove Windows Defender and all services & files related to Windows Defender
+### Remove Windows 11 Defender and all services & files related to Windows Defender
 - https://github.com/ionuttbara/windows-defender-remover
 
 ### Remove and disable all CoPilot stuff in Windows 11
 - https://github.com/zoicware/RemoveWindowsAI
 
-### Powershell Windows 10 debloat, with Gridview popup (so you can select which apps to remove):
+### Powershell Windows 11 debloat, with Gridview popup (so you can select which apps to remove):
 `Get-AppXPackage | Out-GridView -Passthru | Remove-AppXPackage`
 
 `Get-AppXPackage -AllUsers | Out-GridView -Passthru | Remove-AppXPackage`
@@ -107,13 +107,13 @@ Add 3 key/values:
 ### CMD Disk Cleanup old Drivers / Packages:
 `rundll32.exe pnpclean.dll,RunDLL_PnpClean /DRIVERS /MAXCLEAN`
 
-### CMD Windows 10 search indexer service OFF and ON (run CMD as administrator):
+### CMD Windows 11 search indexer service OFF and ON (run CMD as administrator):
 `sc stop “wsearch” && sc config “wsearch” start=disabled`
 
 `sc config “wsearch” start=delayed-auto && sc start “wsearch”`
 
 
-### SFC / DISM commands
+### Windows 11 SFC / DISM commands
 `sfc /scannow`
 
 `Dism.exe /Online /Cleanup-Image /CheckHealth`
@@ -132,13 +132,13 @@ Add 3 key/values:
 
 `sfc /scannow`
 
-### Windows 10 / 11 enable "God mode" icon on desktop
+### Windows 11 enable "God mode" icon on desktop
 ```
 $DesktopPath = [Environment]::GetFolderPath("Desktop");
 mkdir "$DesktopPath\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}"
 ```
 
-### Windows 10/11 enable all power plan options/settings (unhide)
+### Windows 11 enable all power plan options/settings (unhide)
 ```
 $jos = "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings"
 $querylist =  reg query $jos
@@ -154,7 +154,7 @@ $querylist2 = reg query $regfolder
     Set-ItemProperty -Path "$active" -Name "Attributes" -Value '2'
 }
 ```
-### Set Windows Store to DELL_Xps to download Dell Apps
+### Set Windows 11 Store to DELL_Xps to download Dell Apps
 `REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Store" /v StoreContentModifier /f /t REG_SZ /d DELL_Xps`
 
 ### Powershell: Completely stop Windows Update from running and rebooting.
@@ -177,12 +177,11 @@ Stop-Service wuauserv
 sc.exe stop wuauserv 
 takeown /f c:\windows\system32\WaaSMedicSvc.dll
 ```
-### Powershell one liner to set Windows 10 updates to pause (suspend) for +365 days from now (today):
+### Powershell one liner to set Windows 11 updates to pause (suspend) for +365 days from now (today):
 
 ```
 $pause = (Get-Date).AddDays(365); $pause = $pause.ToUniversalTime().ToString( "yyyy-MM-ddTHH:mm:ssZ" ); Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings' -Name 'PauseUpdatesExpiryTime' -Value $pause
 ```
-
 
 
 
@@ -298,7 +297,7 @@ Get-ChildItem -Recurse -Path "C:\Program Files (x86)\Common Files\Adobe" *.exe |
     New-NetFirewallRule -DisplayName "Block $($_.Name) Outbound" -Direction Outbound -Program "$($_.FullName)" -Action Block}
 ```
 
-### Windows 10/11 stop Adobe unnecessary Adobe Background processes
+### Windows 11 stop Adobe unnecessary Adobe Background processes
 Run this to rename these 5 exe-files.
 ```
 move "C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe" "C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe.jos"
